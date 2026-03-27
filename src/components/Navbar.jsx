@@ -1,59 +1,130 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/services', label: 'Services' },
+    { to: '/portfolio', label: 'Portfolio' },
+    { to: '/about', label: 'About' },
+    { to: '/contact', label: 'Contact' },
+  ]
 
   return (
-    <nav className="bg-gray-900 text-white px-8 py-4">
-      
-      <div className="flex justify-between items-center">
+    <nav style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 100,
+      background: 'rgba(15, 12, 41, 0.7)',
+      backdropFilter: 'blur(20px)',
+      borderBottom: '1px solid rgba(255,255,255,0.08)',
+      padding: '16px 40px',
+    }}>
+      <div className="flex justify-between items-center max-w-6xl mx-auto">
+
         {/* Logo */}
-        <div className="text-2xl font-bold text-pink-500">
+        <Link to="/" style={{
+          fontSize: '22px',
+          fontWeight: 'bold',
+          background: 'linear-gradient(90deg, #ec4899, #a855f7)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          textDecoration: 'none'
+        }}>
           DevDou PH
-        </div>
-
-        {/* Desktop Links */}
-        <ul className="hidden md:flex gap-6 text-sm font-medium">
-          <li><Link to="/" className="hover:text-pink-400 transition">Home</Link></li>
-          <li><Link to="/services" className="hover:text-pink-400 transition">Services</Link></li>
-          <li><Link to="/portfolio" className="hover:text-pink-400 transition">Portfolio</Link></li>
-          <li><Link to="/about" className="hover:text-pink-400 transition">About</Link></li>
-          <li><Link to="/contact" className="hover:text-pink-400 transition">Contact</Link></li>
-        </ul>
-
-        {/* Contact Button Desktop */}
-        <Link to="/contact" className="hidden md:block bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-full text-sm font-semibold transition">
-          Hire Us
         </Link>
 
-        {/* Hamburger Button Mobile */}
+        {/* Desktop Links */}
+        <ul className="hidden md:flex gap-8 text-sm font-medium">
+          {links.map((link) => (
+            <li key={link.to}>
+              <Link to={link.to} style={{
+                color: location.pathname === link.to ? '#ec4899' : '#d1d5db',
+                textDecoration: 'none',
+                transition: 'color 0.3s',
+                fontWeight: location.pathname === link.to ? '600' : '400',
+              }}
+                onMouseEnter={e => e.target.style.color = '#ec4899'}
+                onMouseLeave={e => e.target.style.color = location.pathname === link.to ? '#ec4899' : '#d1d5db'}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Hire Us Button Desktop */}
+        <Link to="/contact" className="hidden md:block" style={{
+          background: 'linear-gradient(90deg, #ec4899, #a855f7)',
+          boxShadow: '0 0 20px rgba(236,72,153,0.4)',
+          borderRadius: '999px',
+          padding: '10px 24px',
+          fontSize: '14px',
+          fontWeight: '600',
+          color: 'white',
+          textDecoration: 'none',
+          transition: 'all 0.3s'
+        }}
+          onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 35px rgba(236,72,153,0.7)'}
+          onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(236,72,153,0.4)'}
+        >
+          Hire Us ✨
+        </Link>
+
+        {/* Hamburger */}
         <button
           className="md:hidden text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? (
-            <span className="text-2xl">✕</span>
-          ) : (
-            <span className="text-2xl">☰</span>
-          )}
+          <span style={{ fontSize: '24px' }}>{isOpen ? '✕' : '☰'}</span>
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden mt-4 flex flex-col gap-4 text-sm font-medium pb-4 border-t border-gray-800 pt-4">
-          <Link to="/" className="hover:text-pink-400 transition" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/services" className="hover:text-pink-400 transition" onClick={() => setIsOpen(false)}>Services</Link>
-          <Link to="/portfolio" className="hover:text-pink-400 transition" onClick={() => setIsOpen(false)}>Portfolio</Link>
-          <Link to="/about" className="hover:text-pink-400 transition" onClick={() => setIsOpen(false)}>About</Link>
-          <Link to="/contact" className="hover:text-pink-400 transition" onClick={() => setIsOpen(false)}>Contact</Link>
-          <Link to="/contact" className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-full text-center font-semibold transition" onClick={() => setIsOpen(false)}>
-            Hire Us
+        <div style={{
+          background: 'rgba(15,12,41,0.95)',
+          backdropFilter: 'blur(20px)',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          padding: '20px 40px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px'
+        }}>
+          {links.map((link) => (
+            <Link key={link.to} to={link.to}
+              onClick={() => setIsOpen(false)}
+              style={{
+                color: location.pathname === link.to ? '#ec4899' : '#d1d5db',
+                textDecoration: 'none',
+                fontSize: '15px',
+                fontWeight: '500'
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link to="/contact"
+            onClick={() => setIsOpen(false)}
+            style={{
+              background: 'linear-gradient(90deg, #ec4899, #a855f7)',
+              borderRadius: '999px',
+              padding: '12px 24px',
+              textAlign: 'center',
+              color: 'white',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}
+          >
+            Hire Us ✨
           </Link>
         </div>
       )}
-
     </nav>
   )
 }

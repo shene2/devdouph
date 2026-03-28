@@ -1,38 +1,21 @@
-function About() {
-  const team = [
-    {
-      name: "Shene",
-      role: "UI/UX & Frontend Developer",
-      description: "Handles the design, React frontend, and client communication. Makes sure everything looks clean and works smoothly.",
-      skills: ["React", "Tailwind CSS", "Figma", "UI/UX"],
-      gradient: 'linear-gradient(135deg, #ec4899, #a855f7)'
-    },
-    {
-      name: "Erica",
-      role: "Frontend & Backend Developer",
-      description: "Handles the database, system logic, and backend. Makes sure everything runs perfectly behind the scenes.",
-      skills: ["Django", "PostgreSQL", "React", "System Logic"],
-      gradient: 'linear-gradient(135deg, #a855f7, #6366f1)'
-    },
-  ]
+import { useState } from 'react'
 
-  const reasons = [
-    {
-      title: "Affordable",
-      description: "Student-friendly rates without sacrificing quality.",
-      gradient: 'linear-gradient(135deg, #ec4899, #a855f7)'
-    },
-    {
-      title: "Fast Delivery",
-      description: "Small projects in 3-7 days, systems in 1-3 weeks.",
-      gradient: 'linear-gradient(135deg, #a855f7, #6366f1)'
-    },
-    {
-      title: "Dedicated",
-      description: "We communicate well and deliver what you need.",
-      gradient: 'linear-gradient(135deg, #6366f1, #ec4899)'
-    },
-  ]
+function Contact() {
+  const [focused, setFocused] = useState(null)
+
+  const inputStyle = (name) => ({
+    width: '100%',
+    background: 'rgba(255,255,255,0.05)',
+    border: `1px solid ${focused === name ? 'rgba(236,72,153,0.6)' : 'rgba(255,255,255,0.1)'}`,
+    borderRadius: '12px',
+    padding: '14px 18px',
+    color: 'white',
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'all 0.3s',
+    boxShadow: focused === name ? '0 0 20px rgba(236,72,153,0.15)' : 'none',
+    boxSizing: 'border-box'
+  })
 
   return (
     <div style={{
@@ -64,162 +47,203 @@ function About() {
             color: '#ec4899', fontSize: '13px',
             fontWeight: '600', letterSpacing: '3px',
             textTransform: 'uppercase', marginBottom: '12px'
-          }}>Who We Are</p>
+          }}>Get In Touch</p>
           <h2 style={{ fontSize: '42px', fontWeight: 'bold', marginBottom: '16px' }}>
-            Meet the{' '}
+            Contact{' '}
             <span style={{
               background: 'linear-gradient(90deg, #ec4899, #a855f7)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
-            }}>Team</span>
+            }}>Us</span>
           </h2>
           <p style={{ color: '#9ca3af', maxWidth: '500px', margin: '0 auto' }}>
-            Two 3rd year Computer Science students from Cagayan de Oro, passionate about building digital solutions.
+            Have a project in mind? Reach out and we will get back to you as soon as possible.
           </p>
         </div>
 
-        {/* Team Cards */}
-        <div className="flex flex-col md:flex-row gap-8 justify-center max-w-4xl mx-auto mb-20">
-          {team.map((member) => (
-            <div key={member.name}
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '24px',
-                padding: '40px',
-                flex: 1,
-                textAlign: 'center',
-                transition: 'all 0.3s'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translateY(-8px)'
-                e.currentTarget.style.border = '1px solid rgba(236,72,153,0.4)'
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(236,72,153,0.15)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.border = '1px solid rgba(255,255,255,0.08)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              {/* Avatar */}
-              <div style={{
-                width: '80px', height: '80px',
-                borderRadius: '50%',
-                background: member.gradient,
-                margin: '0 auto 20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '28px',
-                fontWeight: 'bold',
-                boxShadow: '0 0 30px rgba(236,72,153,0.3)'
-              }}>
-                {member.name.charAt(0)}
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
 
-              <h3 style={{ fontSize: '22px', fontWeight: 'bold', marginBottom: '6px' }}>
-                {member.name}
-              </h3>
-              <p style={{
-                fontSize: '13px', fontWeight: '600',
-                marginBottom: '16px',
-                background: 'linear-gradient(90deg, #ec4899, #a855f7)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-                {member.role}
-              </p>
-              <p style={{
-                color: '#9ca3af', fontSize: '14px',
-                lineHeight: '1.7', marginBottom: '24px'
-              }}>
-                {member.description}
-              </p>
-
-              {/* Skills */}
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {member.skills.map((skill) => (
-                  <span key={skill} style={{
-                    fontSize: '11px',
-                    background: 'rgba(255,255,255,0.06)',
-                    color: '#d1d5db',
-                    padding: '4px 14px',
-                    borderRadius: '999px',
-                    border: '1px solid rgba(255,255,255,0.1)'
-                  }}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Why Choose Us */}
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div className="text-center mb-12">
-            <p style={{
-              color: '#ec4899', fontSize: '13px',
-              fontWeight: '600', letterSpacing: '3px',
-              textTransform: 'uppercase', marginBottom: '12px'
-            }}>Our Edge</p>
-            <h3 style={{ fontSize: '32px', fontWeight: 'bold' }}>
-              Why Choose{' '}
+          {/* Contact Info */}
+          <div>
+            <h3 style={{ fontSize: '22px', fontWeight: 'bold', marginBottom: '32px' }}>
+              Reach Us{' '}
               <span style={{
                 background: 'linear-gradient(90deg, #ec4899, #a855f7)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
-              }}>DevDou PH</span>
+              }}>Directly</span>
             </h3>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reasons.map((reason) => (
-              <div key={reason.title}
+            {[
+              { label: 'Facebook', value: 'DevDou PH', icon: 'FB' },
+              { label: 'Gmail', value: 'devdouph@gmail.com', icon: 'GM' },
+              { label: 'Location', value: 'Cagayan de Oro, Philippines', icon: 'PH' },
+            ].map((item) => (
+              <div key={item.label}
                 style={{
+                  display: 'flex', alignItems: 'center', gap: '16px',
+                  marginBottom: '20px',
                   background: 'rgba(255,255,255,0.04)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '24px',
-                  padding: '32px',
-                  textAlign: 'center',
+                  borderRadius: '16px',
+                  padding: '18px 24px',
                   transition: 'all 0.3s'
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.transform = 'translateY(-6px)'
                   e.currentTarget.style.border = '1px solid rgba(236,72,153,0.3)'
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(236,72,153,0.1)'
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(236,72,153,0.1)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.transform = 'translateY(0)'
                   e.currentTarget.style.border = '1px solid rgba(255,255,255,0.08)'
                   e.currentTarget.style.boxShadow = 'none'
                 }}
               >
-                {/* Icon Bar */}
                 <div style={{
-                  width: '48px', height: '4px',
-                  background: reason.gradient,
-                  borderRadius: '999px',
-                  margin: '0 auto 20px',
-                  boxShadow: '0 0 15px rgba(236,72,153,0.4)'
-                }} />
-                <h4 style={{ fontWeight: '700', fontSize: '18px', marginBottom: '10px' }}>
-                  {reason.title}
-                </h4>
-                <p style={{ color: '#9ca3af', fontSize: '14px', lineHeight: '1.6' }}>
-                  {reason.description}
-                </p>
+                  width: '44px', height: '44px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #ec4899, #a855f7)',
+                  display: 'flex', alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '11px', fontWeight: '700',
+                  flexShrink: 0,
+                  boxShadow: '0 0 15px rgba(236,72,153,0.3)'
+                }}>
+                  {item.icon}
+                </div>
+                <div>
+                  <p style={{ fontSize: '12px', color: '#9ca3af', marginBottom: '2px' }}>{item.label}</p>
+                  <p style={{ fontSize: '14px', fontWeight: '600' }}>{item.value}</p>
+                </div>
               </div>
             ))}
-          </div>
-        </div>
 
+            {/* Payment Terms */}
+            <div style={{
+              background: 'rgba(255,255,255,0.04)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(168,85,247,0.3)',
+              borderRadius: '16px',
+              padding: '24px',
+              marginTop: '8px',
+              boxShadow: '0 0 30px rgba(168,85,247,0.08)'
+            }}>
+              <p style={{
+                fontSize: '12px', fontWeight: '600',
+                letterSpacing: '2px', textTransform: 'uppercase',
+                color: '#a855f7', marginBottom: '12px'
+              }}>Payment Terms</p>
+              <p style={{ color: '#d1d5db', fontSize: '14px', marginBottom: '6px' }}>
+                — 50% downpayment to start
+              </p>
+              <p style={{ color: '#d1d5db', fontSize: '14px' }}>
+                — 50% upon project completion
+              </p>
+            </div>
+          </div>
+
+          {/* Message Form */}
+          <div style={{
+            background: 'rgba(255,255,255,0.04)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '24px',
+            padding: '40px'
+          }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '28px' }}>
+              Send a{' '}
+              <span style={{
+                background: 'linear-gradient(90deg, #ec4899, #a855f7)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>Message</span>
+            </h3>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '8px' }}>
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Juan dela Cruz"
+                  style={inputStyle('name')}
+                  onFocus={() => setFocused('name')}
+                  onBlur={() => setFocused(null)}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '8px' }}>
+                  Email or Facebook
+                </label>
+                <input
+                  type="text"
+                  placeholder="juan@gmail.com"
+                  style={inputStyle('email')}
+                  onFocus={() => setFocused('email')}
+                  onBlur={() => setFocused(null)}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '8px' }}>
+                  Service Needed
+                </label>
+                <select
+                  style={inputStyle('service')}
+                  onFocus={() => setFocused('service')}
+                  onBlur={() => setFocused(null)}
+                >
+                  <option value="" style={{ background: '#1a1a2e' }}>Select a service...</option>
+                  <option style={{ background: '#1a1a2e' }}>Basic Website</option>
+                  <option style={{ background: '#1a1a2e' }}>Standard Package</option>
+                  <option style={{ background: '#1a1a2e' }}>Premium System</option>
+                  <option style={{ background: '#1a1a2e' }}>Thesis / Capstone</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '8px' }}>
+                  Message
+                </label>
+                <textarea
+                  rows="4"
+                  placeholder="Tell us about your project..."
+                  style={{ ...inputStyle('message'), resize: 'none' }}
+                  onFocus={() => setFocused('message')}
+                  onBlur={() => setFocused(null)}
+                />
+              </div>
+
+              <button
+                style={{
+                  width: '100%',
+                  background: 'linear-gradient(90deg, #ec4899, #a855f7)',
+                  borderRadius: '12px',
+                  padding: '14px',
+                  color: 'white',
+                  fontWeight: '600',
+                  fontSize: '15px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  boxShadow: '0 0 25px rgba(236,72,153,0.4)'
+                }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 45px rgba(236,72,153,0.7)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 25px rgba(236,72,153,0.4)'}
+              >
+                Send Message
+              </button>
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   )
 }
 
-export default About
+export default Contact

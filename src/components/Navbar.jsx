@@ -73,7 +73,7 @@ function Navbar() {
           onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 35px rgba(236,72,153,0.7)'}
           onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(236,72,153,0.4)'}
         >
-          Hire Us ✨
+          Hire Us
         </Link>
 
         {/* Hamburger */}
@@ -121,7 +121,7 @@ function Navbar() {
               textDecoration: 'none'
             }}
           >
-            Hire Us ✨
+            Hire Us
           </Link>
         </div>
       )}
